@@ -90,6 +90,7 @@
 		<!-- Navbar End -->
 
 		{% block body %}{% endblock %}
+		{% include "partials/_infoProducto.html.twig" %}
 
 		<!-- Footer Start -->
 		<div class="container-fluid bg-light mt-5 py-5">
@@ -209,6 +210,9 @@
 		<script src="{{asset('lib/easing/easing.min.js')}}"></script>
 		<script src="{{asset('lib/waypoints/waypoints.min.js')}}"></script>
 		<script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+
+		{# Javascript modales #}
+		<script src="{{asset('js/app.js')}}"></script>
 
 		<!-- Template Javascript -->
 		<script src="{{asset('js/main.js')}}"></script>
