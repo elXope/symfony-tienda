@@ -32,7 +32,7 @@ class CartController extends AbstractController
             return new JsonResponse("[]", Response::HTTP_NOT_FOUND);
 
         $this->cart->add($id, 1);
-	    
+
         $data = [
             "id"=> $product->getId(),
             "name" => $product->getName(),

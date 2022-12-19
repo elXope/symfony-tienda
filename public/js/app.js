@@ -1,4 +1,5 @@
 //Immediately-Invoked Function Expression (IIFE)
+//INFO PRODUCTO
 (function(){
     const infoProduct = $("#infoProduct");
     $( "a.open-info-product" ).click(function(event) {
@@ -18,20 +19,21 @@
 })();
 
 //Immediately-Invoked Function Expression (IIFE)
+//CARRO
 (function(){
-    const infoProduct = $("#infoProduct");
-    $( "a.open-info-product" ).click(function(event) {
+    const cartModal = $("#cart-modal");
+    $( "a.open-cart-product" ).click(function(event) {
       event.preventDefault();
       const id = $( this ).attr('data-id');
-      const href = `/api/show/${id}`;
+      const href = `/cart/add/${id}`;
       $.get( href, function(data) {
-        $( infoProduct ).find( "#productName" ).text(data.name);
-        $( infoProduct ).find( "#productPrice" ).text(data.price);
-        $( infoProduct ).find( "#productImage" ).attr("src", "/img/" + data.photo);
-        infoProduct.modal('show');
+        $( cartModal ).find( "#productName" ).text(data.name);
+        $( cartModal ).find( "#productQuantity" ).text(data.quantity);
+        $( cartModal ).find( "#productImage" ).attr("src", "/img/" + data.photo);
+        cartModal.modal('show');
       })
     });
-    $(".closeInfoProduct").click(function (e) {
-      infoProduct.modal('hide');
+    $(".closeCart").click(function (e) {
+      cartModal.modal('hide');
     });
 })();
