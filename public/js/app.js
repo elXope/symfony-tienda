@@ -31,7 +31,16 @@
         $( cartModal ).find( "#productQuantity" ).text(data.quantity);
         $( cartModal ).find( "#productImage" ).attr("src", "/img/" + data.photo);
         cartModal.modal('show');
-      })
+      });
+      $('#update_cart').submit(function(evento) {
+        evento.preventDefault();
+        let productQuantity = $('#productQuantity').val();
+        const href2 = `/cart/update/${id}/${productQuantity}`;
+        $.post(href2, function() {
+          cartModal.modal('hide');
+          $("#nCarrito").text(nItems.totalItems);
+        });
+      });
     });
     $(".closeCart").click(function (e) {
       cartModal.modal('hide');

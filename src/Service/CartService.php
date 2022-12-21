@@ -24,5 +24,13 @@ class CartService{
             $cart[$id] = $quantity;
         $this->getSession()->set(self::KEY, $cart);
     }
+    public function update(int $id, int $quantity){
+        $cart = $this->getCart();
+        $cart[$id] = $quantity;
+        $this->getSession()->set(self::KEY, $cart);
+    }
+    public function getTotalItems() {
+        return count($this->getCart());
+    }
 }
 ?>

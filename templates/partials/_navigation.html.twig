@@ -3,6 +3,7 @@
 	<a href="{{path('about')}}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'about')  ? 'active': ''}}">About</a>
 	<a href="{{path('service')}}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'service')  ? 'active': ''}}">Service</a>
 	<a href="{{path('product')}}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'product')  ? 'active': ''}}">Product</a>
+	<a href="{{path('cart')}}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'cart')  ? 'active': ''}}"><i class="bi bi-cart"></i> Cart <span id="nCarrito"></span></a>
 	<div class="nav-item dropdown">
 		<a href="#" class="nav-link dropdown-toggle {{ (app.request.attributes.get('_route') == 'pricing') or (app.request.attributes.get('_route') == 'team') or (app.request.attributes.get('_route') == 'testimonial') or (app.request.attributes.get('_route') == 'blog') or (app.request.attributes.get('_route') == 'blog_detail') ? 'active': ''}}" data-bs-toggle="dropdown">Pages</a>
 		<div class="dropdown-menu m-0">

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Service\CartService;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,15 +25,37 @@ class CartController extends AbstractController
         $this->cart = $cart;
     }
 
+    #[Route('/', name: 'cart')]
+    public function index(): Response
+    {
+        $products = $this->repository->getFromCart($this->cart);
+        //hay que añadir la cantidad de cada producto
+        $items = [];
+        $totalCart = 0;
+        foreach($products as $product){
+            $item = [
+                "id"=> $product->getId(),
+                "name" => $product->getName(),
+                "price" => $product->getPrice(),
+                "photo" => $product->getPhoto(),
+                "quantity" => $this->cart->getCart()[$product->getId()]
+            ];
+            $totalCart += $item["quantity"] * $item["price"];
+            $items[] = $item;
+        }
+
+        return $this->render('cart/index.html.twig', ['items' => $items, 'totalCart' => $totalCart]);
+    }
+
+
     #[Route('/add/{id}', name: 'cart_add', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function cart_add(int $id): Response
+    public function cart_add(int $id): JsonResponse
     {
         $product = $this->repository->find($id);
         if (!$product)
             return new JsonResponse("[]", Response::HTTP_NOT_FOUND);
 
         $this->cart->add($id, 1);
-
         $data = [
             "id"=> $product->getId(),
             "name" => $product->getName(),
@@ -43,5 +66,12 @@ class CartController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
 
     }
+
+    #[Route('/update/{id}/{quantity}', name:'cart_update', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    public function update(int $id, int $quantity = 1): JsonResponse
+    {
+        $this->cart->update($id, $quantity);
+        $nItems = ["totalItems" => $this->cart->getTotalItems()];
+        return new JsonResponse($nItems, Response::HTTP_OK);
+    }
 }
-?>
