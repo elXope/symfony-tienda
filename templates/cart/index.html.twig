@@ -9,7 +9,7 @@
             <!-- Cart list Start -->
             <div class="col-lg-8">
             {% for item in items %}
-                <div class="blog-item mb-5">
+                <div class="blog-item mb-5" id='item-{{item.id}}'>
                     <div class="row g-0 bg-light overflow-hidden">
                         <div class="col-12 col-sm-5 h-100">
                             <img class="img-fluid h-100" src="{{ asset('/img/' ~item.photo) }}" style="object-fit: cover;">
@@ -18,11 +18,11 @@
                             <div class="p-4">
                                 <p>{{ item.quantity }} x ${{ item.price }}</p>
                                 <div class="d-flex mb-3">
-                                     <h4 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">${{ item.quantity * item.price }}</h4>
+                                     <h4 id='item-{{item.id}}-price' class="text-uppercase border-start border-5 border-primary ps-3 mb-4">${{ item.quantity * item.price }}</h4>
                                 </div>
                                 <h5 class="text-uppercase mb-3">{{ item.name }}</h5>
                                 
-                                 <a href="" class="btn btn-primary py-2 px-4">Remove from cart</a>
+                                 <a href="" data-id="{{ item.id }}" class="remove btn btn-primary py-2 px-4">Remove from cart</a>
                             </div>
                         </div>
                     </div>

@@ -46,3 +46,19 @@
       cartModal.modal('hide');
     });
 })();
+
+// Delete element del carro
+(function() {
+  $('.remove').click(function(evento) {
+    evento.preventDefault();
+    const id = $(this).attr('data-id');
+    const href = `/cart/delete/${id}`;
+    let price = $(`#item-${id}-price`).text();
+    price = parseFloat(price.substring(1));
+    let totalPrice = parseFloat($('#totalCart').text().substring(7)) - price;
+    $.post(href, function() {
+      $(`#item-${id}`).hide('slow', function(){ $(`#item-${id}`).remove(); });
+      $('#totalCart').text('Total $' + totalPrice);
+    });
+  });
+})();
