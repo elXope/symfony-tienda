@@ -21,6 +21,7 @@
 //Immediately-Invoked Function Expression (IIFE)
 //CARRO
 (function(){
+  $('#nCarrito').css({"display" : "none"});
     const cartModal = $("#cart-modal");
     $( "a.open-cart-product" ).click(function(event) {
       event.preventDefault();
@@ -31,6 +32,7 @@
         $( cartModal ).find( "#productQuantity" ).text(data.quantity);
         $( cartModal ).find( "#productImage" ).attr("src", "/img/" + data.photo);
         cartModal.modal('show');
+        $('#nCarrito').css({"display" : "inline"});
       });
       $('#update_cart').submit(function(evento) {
         evento.preventDefault();
